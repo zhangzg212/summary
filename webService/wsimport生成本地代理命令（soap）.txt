@@ -1,0 +1,1 @@
+wsimport -s ./ -p com.sobey.soap http://ws.webxml.com.cn/WebServices/MobileCodeWS.asmx?WSDL
