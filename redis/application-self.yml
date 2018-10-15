@@ -1,0 +1,105 @@
+﻿#time 9.19
+#v1 liyue
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://10.9.10.55:8761/eureka/
+      #defaultZone: http://10.9.11.72:8761/eureka/
+  #instance:
+  #  prefer-ip-address: true
+  instance:
+    prefer-ip-address: true
+    instance-id: ${spring.application.name}:${spring.cloud.client.ipAddress}:${spring.application.instance_id:${server.port}}
+    # 指示从eureka服务器获取注册表信息的频率（以秒为单位
+    lease-renewal-interval-in-seconds: 5
+#10.9.10.183
+server:
+  port: 8160
+
+spring:
+  application:
+    name: owinfo-etc-web-clearing
+
+  cloud.loadbalancer.retry.enabled: true
+
+  jackson:
+    dateFormat: yyyy-MM-dd HH:mm:ss
+    jodaDateTimeFormat: yyyy-MM-dd HH:mm:ss
+
+  redis:
+    database: 0
+    host: 127.0.0.1
+    port: 6379
+    password:
+    pool:
+      max-idle: 8
+      min-idle: 0
+      max-active: 8
+      max-wait: -1
+    timeout: 5000
+
+  thymeleaf:
+    mode: HTML5
+    encoding: UTF-8
+    content-type: text/html
+    prefix: classpath:/templates/
+    suffix: .html
+    #关闭缓存
+    cache: false
+
+shiro:
+  cas:
+    serverUrl: http://10.9.10.55/cas
+    casLoginUrl: ${shiro.cas.serverUrl}/login
+    casLogoutUrl: ${shiro.cas.serverUrl}/logout
+    casFilterUrlPattern: /cas
+    shiroServerUrlPrefix: http://10.9.10.55/4A
+    loginUrl: ${shiro.cas.casLoginUrl}?service=${shiro.cas.shiroServerUrlPrefix}${shiro.cas.casFilterUrlPattern}
+    logoutUrl: ${shiro.cas.casLogoutUrl}?service=${shiro.cas.shiroServerUrlPrefix}${shiro.cas.casFilterUrlPattern}
+    successUrl: ${shiro.cas.shiroServerUrlPrefix}/index
+    unauthorizedUrl: ${shiro.cas.shiroServerUrlPrefix}/403
+    sessionTimeout: 600000
+    sessionValidation: 600000
+
+owinfo:
+  web:
+    addressUrl: http://10.9.10.55
+  url:
+    downloadBill: http://10.237.6.11:9085/pay/downloadbill
+
+#熔断器
+feign:
+  hystrix:
+    enabled: true
+
+#超时时间
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 120000
+
+ribbon:
+  ConnectTimeout: 90000
+  ReadTimeout: 90000
+  OkToRetryOnAllOperations: true
+  MaxAutoRetriesNextServer: 1
+  MaxAutoRetries: 1
+
+#禁止超时
+#hystrix.command.default.execution.timeout.enabled: false
+
+#热部署
+spring.devtools.restart.enabled: true
+
+#监控设置
+endpoints.health.sensitive: false
+
+#监控安全验证
+management.security.enabled: false
+
+#日志输出
+#logging.level.root: DEBUG
+#logging.level.org.springframework.web: DEBUG

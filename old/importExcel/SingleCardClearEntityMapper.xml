@@ -1,0 +1,257 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.owinfo.service.core.dao.SingleCardClearDao" >
+  <resultMap id="BaseResultMap" type="com.owinfo.object.entity.SingleCardClearEntity" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="etcCardId" property="etcCardId" jdbcType="VARCHAR" />
+    <result column="operateTime" property="operateTime" jdbcType="DATE" />
+    <result column="operateType" property="operateType" jdbcType="INTEGER" />
+    <result column="clearStatus" property="clearStatus" jdbcType="INTEGER" />
+    <result column="cardBalance" property="cardBalance" jdbcType="VARCHAR" />
+    <result column="countBalance" property="countBalance" jdbcType="VARCHAR" />
+    <result column="clearTime" property="clearTime" jdbcType="DATE" />
+    <result column="remove" property="remove" jdbcType="INTEGER" />
+    <result column="createTime" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="updateTime" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="createBy" property="createBy" jdbcType="VARCHAR" />
+    <result column="updateBy" property="updateBy" jdbcType="VARCHAR" />
+    <result column="spare1" property="spare1" jdbcType="VARCHAR" />
+    <result column="spare2" property="spare2" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, etcCardId, operateTime, operateType, clearStatus, cardBalance, countBalance, clearTime,
+    remove, createTime, updateTime, createBy, updateBy, spare1, spare2
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select
+    <include refid="Base_Column_List" />
+    from etc_singlecard_data
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+
+  <select id="selectByEtcCardId" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select
+    <include refid="Base_Column_List" />
+    from etc_singlecard_data
+    where etcCardId = #{etcCardId,jdbcType=VARCHAR}
+    order by operateTime
+  </select>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from etc_singlecard_data
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByEtcCardId" parameterType="java.lang.String" >
+    delete from etc_singlecard_data
+    where etcCardId = #{etcCardId}
+  </delete>
+  <insert id="insertSelective" parameterType="com.owinfo.object.entity.SingleCardClearEntity" >
+    insert into etc_singlecard_data
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="etcCardId != null" >
+        etcCardId,
+      </if>
+      <if test="operateTime != null" >
+        operateTime,
+      </if>
+      <if test="operateType != null" >
+        operateType,
+      </if>
+      <if test="clearStatus != null" >
+        clearStatus,
+      </if>
+      <if test="cardBalance != null" >
+        cardBalance,
+      </if>
+      <if test="countBalance != null" >
+        countBalance,
+      </if>
+      <if test="clearTime != null" >
+        clearTime,
+      </if>
+      <if test="remove != null" >
+        remove,
+      </if>
+      <if test="createTime != null" >
+        createTime,
+      </if>
+      <if test="updateTime != null" >
+        updateTime,
+      </if>
+      <if test="createBy != null" >
+        createBy,
+      </if>
+      <if test="updateBy != null" >
+        updateBy,
+      </if>
+      <if test="spare1 != null" >
+        spare1,
+      </if>
+      <if test="spare2 != null" >
+       spare2,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="etcCardId != null" >
+         #{etcCardId,jdbcType=VARCHAR},
+      </if>
+      <if test="operateTime != null" >
+        #{operateTime,jdbcType=DATE},
+      </if>
+      <if test="operateType != null" >
+        #{operateType,jdbcType=INTEGER},
+      </if>
+      <if test="clearStatus != null" >
+        #{clearStatus,jdbcType=INTEGER},
+      </if>
+      <if test="cardBalance != null" >
+        #{cardBalance,jdbcType=VARCHAR},
+      </if>
+      <if test="countBalance != null" >
+         #{countBalance,jdbcType=VARCHAR},
+      </if>
+      <if test="clearTime != null" >
+        #{clearTime,jdbcType=DATE},
+      </if>
+      <if test="remove != null" >
+        #{remove,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createBy != null" >
+        #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="updateBy != null" >
+        #{updateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="spare1 != null" >
+        #{spare1,jdbcType=VARCHAR},
+      </if>
+      <if test="spare2 != null" >
+        #{spare2,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.owinfo.object.entity.SingleCardClearEntity" >
+    update etc_singlecard_data
+    <set >
+      <if test="etcCardId != null" >
+        #{etcCardId,jdbcType=VARCHAR},
+      </if>
+      <if test="operateTime != null" >
+        #{operateTime,jdbcType=DATE},
+      </if>
+      <if test="operateType != null" >
+        #{operateType,jdbcType=INTEGER},
+      </if>
+      <if test="clearStatus != null" >
+        #{clearStatus,jdbcType=INTEGER},
+      </if>
+      <if test="cardBalance != null" >
+        #{cardBalance,jdbcType=VARCHAR},
+      </if>
+      <if test="countBalance != null" >
+        #{countBalance,jdbcType=VARCHAR},
+      </if>
+      <if test="clearTime != null" >
+        #{clearTime,jdbcType=DATE},
+      </if>
+      <if test="remove != null" >
+        #{remove,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createBy != null" >
+        #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="updateBy != null" >
+        #{updateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="spare1 != null" >
+        #{spare1,jdbcType=VARCHAR},
+      </if>
+      <if test="spare2 != null" >
+        #{spare2,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+
+  <update id="updateByEtcCardId" parameterType="com.owinfo.object.entity.SingleCardClearEntity" >
+    update etc_singlecard_data
+    <set >
+      <if test="etcCardId != null" >
+        #{etcCardId,jdbcType=VARCHAR},
+      </if>
+      <if test="operateTime != null" >
+        #{operateTime,jdbcType=DATE},
+      </if>
+      <if test="operateType != null" >
+        #{operateType,jdbcType=INTEGER},
+      </if>
+      <if test="clearStatus != null" >
+        #{clearStatus,jdbcType=INTEGER},
+      </if>
+      <if test="cardBalance != null" >
+        #{cardBalance,jdbcType=VARCHAR},
+      </if>
+      <if test="countBalance != null" >
+        #{countBalance,jdbcType=VARCHAR},
+      </if>
+      <if test="clearTime != null" >
+        #{clearTime,jdbcType=DATE},
+      </if>
+      <if test="remove != null" >
+        #{remove,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createBy != null" >
+        #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="updateBy != null" >
+        #{updateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="spare1 != null" >
+        #{spare1,jdbcType=VARCHAR},
+      </if>
+      <if test="spare2 != null" >
+        #{spare2,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where etcCardId = #{etcCardId,jdbcType=VARCHAR}
+  </update>
+
+  <select id="listSingleCardClear" resultMap="BaseResultMap" parameterType="map">
+    SELECT <include refid="Base_Column_List" /> FROM etc_singlecard_data
+    <trim prefix="WHERE" prefixOverrides="AND">
+      <if test="startDate != null  and startDate.length()>0">AND DATE_FORMAT(clearDate , '%Y-%m-%d') &gt;= DATE_FORMAT(#{startDate} , '%Y-%m-%d')</if>
+      <if test="endDate != null  and endDate.length()>0">AND DATE_FORMAT(clearDate , '%Y-%m-%d') &lt;= DATE_FORMAT(#{endDate} , '%Y-%m-%d')</if>
+    </trim>
+    order by operateTime desc
+  </select>
+  <select id="isExist" resultType="map" parameterType="map">
+    SELECT
+    count(*) AS "totalCount"
+    FROM etc_singlecard_data
+    WHERE etcCardId = #{etcCardId}
+  </select>
+</mapper>
